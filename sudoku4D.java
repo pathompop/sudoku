@@ -39,45 +39,27 @@ public class sudoku4D {
 
         static boolean check(int[][][][] sudoku) {
                 
-                //ตรวจกล่อง
                 for (int i = 0; i < 9; i++) {
-                        boolean[] f = new boolean[10];
-                        int boxrow = i % 3;
-                        int boxcol = i / 3;
-                        for (int j = 0; j < 9; j++) {
-                                int cellrow = j % 3;
-                                int cellcol = j / 3;
-                                int nums = sudoku[boxcol][boxrow][cellcol][cellrow];
-                                if (nums < 1 || nums > 9 || f[nums]) return false;
-                                f[nums] = true;
-                        }
-                }
+                        boolean[] fbox = new boolean[10];
+                        boolean[] frow = new boolean[10];
+                        boolean[] fcol = new boolean[10];
 
-                //ตรวจแนวนอน
-                for (int i = 0; i < 9; i++) {
-                        boolean[] f = new boolean[10];
-                        int boxrow = i % 3;
-                        int boxcol = i / 3;
-                        for (int j = 0; j < 9; j++) {
-                                int cellrow = j % 3;
-                                int cellcol = j / 3;
-                                int nums = sudoku[boxcol][cellcol][boxrow][cellrow];
-                                if (nums < 1 || nums > 9 || f[nums]) return false;
-                                f[nums] = true;
-                        }
-                }
+                        int imod3 = i % 3;
+                        int id3 = i / 3;
 
-                //ตรวจแนวตั้ง
-                for (int i = 0; i < 9; i++) {
-                        boolean[] f = new boolean[10];
-                        int boxrow = i % 3;
-                        int boxcol = i / 3;
                         for (int j = 0; j < 9; j++) {
-                                int cellrow = j % 3;
-                                int cellcol = j / 3;
-                                int nums = sudoku[cellcol][boxcol][cellrow][boxrow];
-                                if (nums < 1 || nums > 9 || f[nums]) return false;
-                                f[nums] = true;
+                                int jmod3 = j % 3;
+                                int jd3 = j / 3;
+
+                                int box = sudoku[id3][imod3][jd3][jmod3];       //เช็คกล่อง
+                                int row = sudoku[id3][jd3][imod3][jmod3];       //เช็คแนวนอน
+                                int col = sudoku[jd3][id3][jmod3][imod3];       //เช็คแนวตั้ง
+
+                                if (fbox[box] || frow[row] || fcol[col]) return false;
+
+                                fbox[box] = true;
+                                frow[row] = true;
+                                fcol[col] = true;
                         }
                 }
 

@@ -1,7 +1,7 @@
 public class sudoku4D {
 
         public static void main(String[] args) {
-        int[][][][] sudoku = {{ 
+        int[][][][] sudoku = {{
                 {{ 5, 3, 4 },{ 6, 7, 2 },{ 1, 9, 8 }},
                 {{ 6, 7, 8 },{ 1, 9, 5 },{ 3, 4, 2 }},
                 {{ 9, 1, 2 },{ 3, 4, 8 },{ 5, 6, 7 }}},

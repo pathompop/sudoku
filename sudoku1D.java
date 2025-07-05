@@ -14,10 +14,18 @@ public class sudoku1D {
                 3,4,5, 2,8,6, 1,7,9
             };
 
-            for (int i = 0; i < 9; i++) {
+            System.out.println(check(sudoku));
+    }
+
+    static boolean check(int[] sudoku) {
+        for (int i = 0; i < 9; i++) {
+            boolean[] fbox = new boolean[10];
+            boolean[] frow = new boolean[10];
+            boolean[] fcol = new boolean[10];
                 int im9 = i * 9;
                 int ip3 = i / 3;
                 int imod3 = i % 3;
+                
                 for (int j = 0; j < 9; j++) {
                     int jm9 = j * 9;
                     int jp3 = j / 3;
@@ -25,26 +33,16 @@ public class sudoku1D {
 
                     int i3 = ip3 * 3 + jp3;
                     int j3 = imod3 * 3 + jmod3;
-                    System.out.print(sudoku[i3 * 9 + j3] + " ");
-                }
-                System.out.println();
-            }
-            
-            // for (int i = 0; i < 9; i++) {
-            //     int i3 = (i + ((i / 3) * 6)) * 3;
-            //     System.out.println("p " + (i3+i)*3 + " = " + sudoku[i3]);
-            // }
-    }
 
-    static boolean check(int[] sudoku) {
-        for (int i = 0; i < 9; i++) {
-                int im9 = i * 9;
-                
-                for (int j = 0; j < 9; j++) {
-                    int jm9 = j * 9;
-
+                    int box = sudoku[i3 * 9 + j3];
                     int row = sudoku[j+im9];
                     int col = sudoku[i+jm9];
+
+                    if (fbox[box] || frow[row] || fcol[col]) return false;
+
+                    fbox[box] = true;
+                    frow[row] = true;
+                    fcol[col] = true;
                 }
             }
 
